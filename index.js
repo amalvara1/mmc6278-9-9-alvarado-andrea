@@ -24,11 +24,27 @@ form.onsubmit = async e => {
         .then(displayWeather) 
     } catch(err){
         weatherDiv.innerHTML = err.message
-       
+        cityInput.value = ""
     }  
-    }
+}
 
-
+const displayWeather = ({
+    name,
+    sys: {
+        country
+    },
+  
+}) => {
+    weatherDiv.innerHTML = ""
+    weatherDiv.innerHTML = `<h2>${name} ${country}</h2>
+    <a></a>
+    <img></img>
+    <p></p>
+    <p></p>
+    <p></p>`
+}
+   
+   
 
 /* -----------------------E5 Structure---------------------------
 var URL = "https://api.openweathermap.org/data/2.5/weather?q="
