@@ -6,10 +6,27 @@
 //destructuring
 //async await functions
 
-var weatherDiv = document.getElementById('weather')
-var form = document.querySelector('form')
-var citySearch = document.getElementById('weather-search')
+const URL = "https://api.openweathermap.org/data/2.5/weather?q="
+const key = "&units=imperial&appid=b8654bb0c6ea71c3b1056ab5f5581615"
+const weatherDiv = document.getElementById('weather')
+const form = document.querySelector('form')
+const cityInput = document.getElementById('weather-search')
 
+
+form.onsubmit = async e => {
+    e.preventDefault()
+    const inputLocation = cityInput.value
+    if (!inputLocation) return
+    try{
+        const res = await fetch(URL + inputLocation + key)
+        if (res.status !==200) throw new Error('Location not Found')
+        const weatherData = await res.json()
+        .then(displayWeather) 
+    } catch(err){
+        weatherDiv.innerHTML = err.message
+       
+    }  
+    }
 
 
 
